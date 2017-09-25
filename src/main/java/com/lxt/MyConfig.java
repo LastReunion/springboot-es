@@ -19,14 +19,13 @@ public class MyConfig {
 
     @Bean
     public TransportClient client() throws UnknownHostException {
-        InetSocketTransportAddress node = new InetSocketTransportAddress(
-                InetAddress.getByName("localhost"),
-                9200
-        );
 
-        Settings settings = Settings.builder().put("cluster.name","lxt-application").build();
+        //获取本机节点
+        InetSocketTransportAddress node = new InetSocketTransportAddress(InetAddress.getByName("localhost"),9300);
 
-        TransportClient client = new PreBuiltTransportClient(Settings.EMPTY);
+        Settings settings = Settings.builder().put("cluster.name","elasticsearch").build();
+
+        TransportClient client = new PreBuiltTransportClient(settings);
         client.addTransportAddress(node);
 
         return client;
